@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Usage: sbatch fingerprint.sh [bam_file] [hg19 or hg38]
 # output to current directory.
@@ -12,9 +12,9 @@ REF=$2
 # Parse inputs
 SAMPLENAME=$(basename $BAM .bam)
 if [ $REF = "hg19" ]; then
-	$BED="snp138Common.n1000.vh20140318.bed"
+	BED="snp138Common.n1000.vh20140318.bed"
 elif [ $REF = "hg38" ]; then
-	$BED="snp138Common.n1000.vh20140318.hg38.bed"
+	BED="snp138Common.n1000.vh20140318.hg38.bed"
 else
 	echo "2nd arg should be 'hg19' or 'hg38'"
 	exit 1
