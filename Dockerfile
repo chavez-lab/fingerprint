@@ -20,6 +20,9 @@ RUN pip install pysam==0.7.8
 # Add required files
 COPY . /app
 
+# Change permissions
+RUN chmod +x /app/fingerprint.sh
+
 # Run 
 ## Cavatica requires
 #CMD ["/bin/bash"]
