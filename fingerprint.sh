@@ -20,6 +20,6 @@ else
 	echo "2nd arg should be 'hg19' or 'hg38'"
 	exit 1
 fi
-
-python2 bsnp.py $BED $BAM \
+CMD="$(<$MYDIR/bsnp.py)"
+python2 $CMD $BED $BAM \
 	> ${SAMPLENAME}.fp
