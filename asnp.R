@@ -16,14 +16,14 @@ options(stringsAsFactors = FALSE)
 options(scipen=999)
 
 suppressMessages(library(minfi))
-
+print("running...")
 
 # args
 a <- commandArgs(trailingOnly = TRUE)
 a1 <- a[1]
 #a1 <- "/cb0801/hovestad/chaos/fingerprint/fingerprint/snp141Common_RS-CG.n436.vh20151103.bed"
 a2 <- a[2]
-#a2 <- "/cb0803/hovestad/data450k/minfi/6752625054/6752625054_R04C02.RData"
+#a2 <- "/cb0803/hovestad/data450k/minfi/6752625054/6752625054_R04C02_Red.idat"
 a3 <- a[3]
 #a3 <- "120618__60AB_Bender_Jones_SampleMethylationProfile_all_noAnno.MB113"
 a4 <- a[4]
@@ -31,11 +31,12 @@ a4 <- a[4]
 
 # load SNP positions
 #message("loading ", a1)
-pos <- read.table(a1, sep="\t")
+pos <- read.table(a1)
 
 # load 450k data
 message("loading ", a2)
-load(a2)
+RGset <- read.metharray(a2)
+#load(a2)
 
 # function
 intensitySNP <- function(rg, a, b, a_col, b_col) {
@@ -56,7 +57,7 @@ intensitySNP <- function(rg, a, b, a_col, b_col) {
   cbind(A, B)
 }
 
-# process
+
 snp <- intensitySNP(RGset, pos$V10, pos$V11, pos$V12, pos$V13)
 
 # write
