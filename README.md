@@ -10,6 +10,18 @@ the fingerprint toolset provides functionality for in-silico genotyping.
 
 the toolset can be used to __confirm expected genotype matches__ (e.g. tumor & normal, WGBS & 450k array), or to __detect unexpected matches__ (e.g. different DNA sources, sample swaps). it consists of two major parts:
 
+#### Installation
+Minimum dependencies:
+- Python 3.X
+- pysam (for .bam input)
+- minfi (for .idat input)
+
+It is recommended to create an environment using mamba:
+- [Follow install instructions for mamba]
+- `mamba create -n fingerprint-mamba`
+- `mamba activate fingerprint-mamba`
+- `mamba install bioconductor-minfi`
+
 #### generate fingerprint files (.fp):
 - from BAM alignment files (python script):
 
@@ -17,10 +29,11 @@ the toolset can be used to __confirm expected genotype matches__ (e.g. tumor & n
 python fingerprint/bsnp.py fingerprint/snp141Common_RS-CG.n150.vh20151103.bed sample.bam > sample.bam.fp
 ```
 
-- from 450k data files (R script, RData input file must contain a minfi RGset object of a single sample):
+- from 450k data files (R script, input file must be .idat or prefix, eg. /Users/ochapman/Downloads/203960200003_R06C01_Red.idat. 
+_Red.idat suffix is optional. _Grn.idat file must be present in the same directory.
 
 ```Shell
-Rscript fingerprint/asnp.R fingerprint/snp141Common_RS-CG.n150.vh20151103.bed sample.RData sample sample.fp
+Rscript fingerprint/asnp.R fingerprint/snp141Common_RS-CG.n150.vh20151103.bed 203960200003_R06C01_Red.idat sample sample.fp
 ```
 
 #### analyze fingerprint files to identify genotype matches:
