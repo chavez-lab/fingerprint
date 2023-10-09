@@ -27,7 +27,7 @@ def mod_bsnp(sysargv):
 	#######################################
 	# arguments, filehandles
 
-	parser = argparse.ArgumentParser(prog="methylCtools bsnp", version="1.0", description="extract allele frequencies from alignment file for in-silico genotyping (fingerprinting).")
+	parser = argparse.ArgumentParser(prog="methylCtools bsnp",  description="extract allele frequencies from alignment file for in-silico genotyping (fingerprinting).")
 	parser.add_argument("-s", "--silent", dest="qf", action="store_false", help="do not show status messages")
 	
 	parser.add_argument("-q", "--mapQ", metavar="INT", dest="mapQ", type=int, default=1, action="store", help="skip alignments with mapQ smaller than INT [1]")
@@ -124,14 +124,13 @@ def mod_bsnp(sysargv):
 								if pileupread.alignment.is_read1 != pileupread.alignment.is_reverse: continue
 							elif snp[3] == "G" or snp[4] == "G":
 								if pileupread.alignment.is_read1 == pileupread.alignment.is_reverse: continue
-			
-						if pileupread.alignment.qual[pileupread.qpos] < (args.baseQ+33): continue
+						if pileupread.alignment.query_qualities[pileupread.query_position] < (args.baseQ): continue
 						if pileupread.alignment.mapq < args.mapQ: continue	# check for minimum mapQ and baseQ
 						
-						if pileupread.alignment.seq[pileupread.qpos] == snp[3]:
+						if pileupread.alignment.seq[pileupread.query_position] == snp[3]:
 							if rg: c[rg][snp[-1]][0] += 1					# count
 							c["combined"][snp[-1]][0] += 1
-						elif pileupread.alignment.seq[pileupread.qpos] == snp[4]:
+						elif pileupread.alignment.seq[pileupread.query_position] == snp[4]:
 							if rg: c[rg][snp[-1]][1] += 1
 							c["combined"][snp[-1]][1] += 1
 						

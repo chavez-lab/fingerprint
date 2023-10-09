@@ -13,9 +13,9 @@ def run_sequencing():
 def main():
     parser = argparse.ArgumentParser(description="Entry program for fingerprinting analysis.")
     parser.add_argument('-i','--input',required=True, help="Path to .bam or .idat file. Should end with either suffix.")
-    parser.add_argument('-b','--snp_set', help="Path to a set of snp positions in .bed format. Default is platform-specific."
-    parser.add_argument('-n','--name', help="Sample name for output files. Default is basename of input."
-    parser.add_argument('-o','--output', help="Output filename. Default is [name].fp."
+    parser.add_argument('-b','--snp_set', help="Path to a set of snp positions in .bed format. Default is platform-specific.")
+    parser.add_argument('-n','--name', help="Sample name for output files. Default is basename of input.")
+    parser.add_argument('-o','--output', help="Output filename. Default is [name].fp.")
 
     args = parser.parse_args()
 
@@ -36,14 +36,17 @@ def main():
         if args.snp_set == None:
             args.snp_set = dnam_bed
         command = ['Rscript', asnp, args.snp_set, input_file, args.name, args.output]
+        subprocess.run(command)
     elif input_file.suffix == '.bam':
         if args.snp_set == None:
             args.snp_set = seq_bed
-        command = ['Python', bsnp, args.snp_set, input_file, '>', args.output]
+        outfile = open(args.output,'w')
+        command = ['python', bsnp, args.snp_set, input_file, '--name', args.name]
+        subprocess.call(command, stdout=outfile)
+        outfile.close()
     else:
         raise ValueError("Input file should be .bam or .idat")
 
-    subprocess.run(command)    
-
+    print("finished running command:\n"+" ".join(map(str,command)))
 if __name__ == "__main__":
     main()

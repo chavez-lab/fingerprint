@@ -20,6 +20,8 @@ It is recommended to create an environment using mamba:
 - [Follow install instructions for mamba]
 - `mamba create -n fingerprint-mamba`
 - `mamba activate fingerprint-mamba`
+- `mamba install python=3.10`
+- `mamba install -c bioconda pysam=0.21.0`
 - `mamba install bioconductor-minfi`
 
 #### generate fingerprint files (.fp):
