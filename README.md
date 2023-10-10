@@ -8,21 +8,9 @@
 
 the fingerprint toolset provides functionality for in-silico genotyping.
 
-the toolset can be used to __confirm expected genotype matches__ (e.g. tumor & normal, WGBS & 450k array), or to __detect unexpected matches__ (e.g. different DNA sources, sample swaps). it consists of two major parts:
+the toolset can be used to __confirm expected genotype matches__ (e.g. tumor & normal, WGBS & 450k array), or to __detect unexpected matches__ (e.g. different DNA sources, sample swaps). (Note: currently works with 450k but not EPIC arrays.)
 
-#### Installation
-Minimum dependencies:
-- Python 3.X
-- pysam (for .bam input)
-- minfi (for .idat input)
-
-It is recommended to create an environment using mamba:
-- [Follow install instructions for mamba]
-- `mamba create -n fingerprint-mamba`
-- `mamba activate fingerprint-mamba`
-- `mamba install python=3.10`
-- `mamba install -c bioconda pysam=0.21.0`
-- `mamba install bioconductor-minfi`
+It consists of two major parts:
 
 #### generate fingerprint files (.fp):
 - from BAM alignment files (python script):
@@ -57,3 +45,16 @@ the `bsnp_analyze.R` tool follows a very simple statistical approach (i.e. just 
 - `snp141Common_RS-CG.n192.vh20151103.bed`: subset of the previous (avHet >0.2). **this file is recommended for comparing 450k data, and for comparing 450k to sequencing data**.
 - `snp141Common_RS-CG.n50.vh20151104.bed`: subset of the previous (filtered for coverage in Exome- and RNA-seq data).
 
+#### Installation
+Minimum dependencies:
+- Python 3.X
+- pysam (for .bam input)
+- minfi (for .idat input)
+
+It is recommended to create an environment using mamba:
+- [Follow install instructions for mamba]
+- `mamba create -n fingerprint-mamba`
+- `mamba activate fingerprint-mamba`
+- `mamba install python=3.10`
+- `mamba install -c bioconda pysam=0.21.0`
+- `mamba install bioconductor-minfi`
