@@ -23,8 +23,6 @@
 options(max.print=1000)
 options(stringsAsFactors=FALSE)
 options(scipen=999)
-print("WTF?")
-
 
 ###############################################
 # Implementation of simple union-find algorithm
