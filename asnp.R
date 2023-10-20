@@ -36,7 +36,12 @@ pos <- read.table(a1)
 # load 450k data
 message("loading ", a2)
 RGset <- read.metharray(a2)
-#load(a2)
+
+# if EPIC, convert to 450k
+if(RGset@annotation["array"]=="IlluminaHumanMethylationEPIC"){
+  message("converting sample to 450k annotation...")
+  RGset <- convertArray(RGset, "IlluminaHumanMethylation450k")
+}
 
 # function
 intensitySNP <- function(rg, a, b, a_col, b_col) {
@@ -45,7 +50,7 @@ intensitySNP <- function(rg, a, b, a_col, b_col) {
   
   a.split <- strsplit(a, ",")
   b.split <- strsplit(b, ",")
-  
+
   a.green <- sapply(split(rg.green[unlist(a.split)], rep(seq(length(a.split)), sapply(a.split, length))), sum)
   a.red <- sapply(split(rg.red[unlist(a.split)], rep(seq(length(a.split)), sapply(a.split, length))), sum)
   b.green <- sapply(split(rg.green[unlist(b.split)], rep(seq(length(b.split)), sapply(b.split, length))), sum)

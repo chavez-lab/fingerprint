@@ -57,4 +57,5 @@ It is recommended to create an environment using mamba:
 - `mamba activate fingerprint-mamba`
 - `mamba install python=3.10`
 - `mamba install -c bioconda pysam=0.21.0`
-- `mamba install bioconductor-minfi`
+- `mamba install bioconductor-minfi r-getopt`
+- (required for fingerprinting EPIC arrays) `mamba install -c bioconda bioconductor-illuminahumanmethylation450kmanifest bioconductor-illuminahumanmethylationEPICmanifest`
