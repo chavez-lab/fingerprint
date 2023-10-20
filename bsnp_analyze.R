@@ -34,7 +34,7 @@ options(scipen=999)
 ###############################################
 
 set_find <- function(i, target_array) {
-  if(target_array[i] < 0 || i < 0)  {
+  if(i < 0 || target_array[i] < 0)  {
     return(i) 
   } else {
     return(set_find(target_array[i], target_array))
