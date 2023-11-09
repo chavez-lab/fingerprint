@@ -43,7 +43,7 @@ def main():
         if args.snp_set == None:
             args.snp_set = seq_bed
         outfile = open(args.output,'w')
-        command = ['python', bsnp, args.snp_set, input_file, '--name', args.name]
+        command = ['python3', bsnp, args.snp_set, input_file, '--name', args.name]
         subprocess.call(command, stdout=outfile)
         outfile.close()
     else:
